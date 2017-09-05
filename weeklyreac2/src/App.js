@@ -13,6 +13,7 @@ class App extends Component {
     this.barcaTransfer = this.barcaTransfer.bind(this);
     this.MadridTransfer = this.MadridTransfer.bind(this);
     this.TransferList = this.TransferList.bind(this);
+    this.Restart = this.Restart.bind(this);
     this.state = {
       currentPlayer: '',
       transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
@@ -40,10 +41,12 @@ class App extends Component {
   barcaTransfer(event) {
     var barcaTransfer = event.target.value;
     var barcaTeam = this.state.barca;
-    barcaTeam.push(barcaTransfer);
     var playerArray = this.state.transfers;
-    playerArray.splice(barcaTransfer, 1);
+    if( playerArray.indexOf(playerArray,  barcaTransfer)){
+     playerArray.splice(barcaTransfer, 1)
+     barcaTeam.push(barcaTransfer);
 
+   }
     this.setState({
       transfers: playerArray,
       barca: barcaTeam
@@ -53,9 +56,12 @@ class App extends Component {
   MadridTransfer(event) {
     var madridTransfer = event.target.value;
     var madridTeam = this.state.madrid;
-    madridTeam.push(madridTransfer);
     var playerArray = this.state.transfers;
-    playerArray.splice(madridTransfer, 1);
+   if( playerArray.indexOf(playerArray,  madridTransfer)){
+     playerArray.splice(madridTransfer, 1)
+      madridTeam.push(madridTransfer);
+
+   }
     this.setState({
       transfers: playerArray,
       madrid: madridTeam
@@ -65,14 +71,24 @@ class App extends Component {
   TransferList(event) {
     var transferBack = event.target.value;
     var playerArray = this.state.transfers;
-    playerArray.push(transferBack);
+    if( playerArray.indexOf(playerArray, transferBack)){
+     playerArray.splice(transferBack, 1)
+         playerArray.push(transferBack);
+
+   }
     this.setState({
       transfers: playerArray
     })
-
-
   }
+  Restart(){
+    this.setState({
+      currentPlayer: '',
+      transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
+      madrid: [],
+      barca: []
 
+    })
+  }
 
 
   render() {
@@ -127,6 +143,7 @@ class App extends Component {
             getPlayer={this.getPlayer}
             currentPlayer={this.state.currentPlayer}
             handleClick={this.handleClick}
+            Restart={this.Restart}
           />
           {contactList}
         </div>
