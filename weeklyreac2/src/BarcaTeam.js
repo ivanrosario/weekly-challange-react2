@@ -1,14 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class BarcaTeam extends Component {
-  render() {
+
+function BarcaTeam(props) {
+
     return (
-      <div>
-        <div className="barcaButton">
+      <div className="people" >
+        <div>
+         <p>{props.person}</p>
+          <button onClick={props.barcaTransfer} value={props.value}>Barca?</button>
+          <button value={props.value}  value={props.value} onClick={props.TransferList}>TransferList</button>  
+          <button value={props.value} value={props.value} onClick={props.MadridTransfer}>Madrid?</button>  
         </div>
       </div>
     )
-  }
-}
+} 
 
+
+  BarcaTeam.propTypes = {
+  MadridTransfer: PropTypes.func,
+  barcaTransfer: PropTypes.func,
+  TransferList:  PropTypes.func,
+
+};
 export default BarcaTeam;

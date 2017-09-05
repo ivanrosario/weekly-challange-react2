@@ -1,24 +1,43 @@
-/* .App {
-  text-align: center;
+   body{
+font-family: sans-serif;
+background:  no-repeat center/125% url('image/champions_league.jpg');
+color: green;
+} 
+
+ .rm-shield {
+z-index: 1;
+background-image: url('image/rm-shield.gif');
+background-size: cover;
+height: 300px;
+width: 225px;
+
+}  
+
+
+.Transfer{
+margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.window{
+  background-color: #0E1E5B;
+  border: 3px solid #6594C0;
+  margin-left: 600px;
+  margin-right: 660px;
+  text-align:center;
+}
+.barca{
+  margin-left: 1300px;
+  background-color: #0E1E5B;
+  border: 3px solid red;
+
+
+
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+.madrid{
+  margin-right: 1300px;
+  background-color: white;
+  border: 3px solid gold;
 
-.App-intro {
-  font-size: large;
-}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */
+}

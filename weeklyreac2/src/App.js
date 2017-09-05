@@ -12,7 +12,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.barcaTransfer = this.barcaTransfer.bind(this);
     this.MadridTransfer = this.MadridTransfer.bind(this);
-
+    this.TransferList = this.TransferList.bind(this);
     this.state = {
       currentPlayer: '',
       transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
@@ -20,14 +20,14 @@ class App extends Component {
       barca: []
     }
   }
-
+  // grabs player info
   getPlayer(props) {
     const player = props.target.value;
     this.setState({
       currentPlayer: player,
     });
   }
-
+  // pushs info to transfers(avalaibe players)
   handleClick() {
     var playerArray = this.state.transfers;
     playerArray.push(this.state.currentPlayer);
@@ -36,49 +36,104 @@ class App extends Component {
       transfers: playerArray,
     });
   }
-
-  barcaTransfer(props) {
-    var Transfer = props.target.value;
+  //pushs to the team of Barca
+  barcaTransfer(event) {
+    var barcaTransfer = event.target.value;
     var barcaTeam = this.state.barca;
-    barcaTeam.push(Transfer);
+    barcaTeam.push(barcaTransfer);
+    var playerArray = this.state.transfers;
+    playerArray.splice(barcaTransfer, 1);
+
     this.setState({
+      transfers: playerArray,
       barca: barcaTeam
     })
   }
-  
-  MadridTransfer() {
-    var madridTransfer =  this.state.transfers;
+  //pushs to madrid team
+  MadridTransfer(event) {
+    var madridTransfer = event.target.value;
     var madridTeam = this.state.madrid;
     madridTeam.push(madridTransfer);
+    var playerArray = this.state.transfers;
+    playerArray.splice(madridTransfer, 1);
     this.setState({
+      transfers: playerArray,
       madrid: madridTeam
     })
   }
+  //sends back to unassaign list 
+  TransferList(event) {
+    var transferBack = event.target.value;
+    var playerArray = this.state.transfers;
+    playerArray.push(transferBack);
+    this.setState({
+      transfers: playerArray
+    })
+
+
+  }
+
+
 
   render() {
+    //all of these are  used to loop thru each one 
     const contactList = this.state.transfers.map(function (person, i) {
+      return (
+        <TransferListBox
+          value={person}
+          key={i}
+          person={person}
+          barcaTransfer={this.barcaTransfer}
+          MadridTransfer={this.MadridTransfer}
+          TransferList={this.TransferList}
+
+        />
+      )
+    }, this)
+    const madridList = this.state.madrid.map(function (person, i) {
+      return (
+        < Real
+          value={person}
+          key={i}
+          person={person}
+          barcaTransfer={this.barcaTransfer}
+          MadridTransfer={this.MadridTransfer}
+          TransferList={this.TransferList}
+
+        />
+      )
+    }, this)
+    const barcaList = this.state.barca.map(function (person, i) {
+      return (
+        < BarcaTeam
+          value={person}
+          key={i}
+          person={person}
+          barcaTransfer={this.barcaTransfer}
+          MadridTransfer={this.MadridTransfer}
+          TransferList={this.TransferList}
+
+        />
+      )
+    }, this)
+    // end of the loops of teams / unassaign list i just call them by the varaible 
     return (
-      <TransferListBox 
-        key={i}
-        person={person}
-
-      />
-    )
-  })
-
-  return (
-    <div className="rm-shield">
-      <div className="barca">
-        <Real />
-        <BarcaTeam />
+      <div>
+        <div className="madrid">
+          {madridList}
+        </div>
+        <div className="window">
+          <TransferList
+            getPlayer={this.getPlayer}
+            currentPlayer={this.state.currentPlayer}
+            handleClick={this.handleClick}
+          />
+          {contactList}
+        </div>
+        <div className="barca">
+          {barcaList}
+        </div>
       </div>
-      <TransferList
-        getPlayer={this.getPlayer}
-        currentPlayer={this.state.currentPlayer}
-        handleClick={this.handleClick}
-      />
-      {contactList}
-    </div>
     );
   }
 }

@@ -1,12 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Real extends Component {
-  render() {
+
+function Real(props) {
+
+
     return (
-      <div>
-     </div>
+      <div className="people" >
+        <div>
+         <p>{props.person}</p>
+          <button onClick={props.barcaTransfer} value={props.value}>Barca?</button>
+          <button value={props.value} onClick={props.TransferList}>TransferList</button>  
+          <button value={props.value} onClick={props.MadridTransfer}>Madrid?</button>  
+        </div>
+      </div>
     )
-  }
-}
+} 
 
+
+ Real.propTypes = {
+  MadridTransfer: PropTypes.func,
+ barcaTransfer: PropTypes.func,
+ TransferList:  PropTypes.func,
+
+};
 export default Real;
