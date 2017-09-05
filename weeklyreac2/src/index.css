@@ -1,19 +1,19 @@
-   body{
-font-family: sans-serif;
-background:  no-repeat center/125% url('image/champions_league.jpg');
-color: white;
+body {
+  font-family: sans-serif;
+  background:  no-repeat center/125% url('image/champions_league.jpg');
+  color: white;
 } 
 
-.Transfer{
+.Transfer {
   margin-left: 650px;
   color: red;
 } 
 
- .people{
+.people {
   text-align:center;
   padding: -5px 31px 19px 12px;
 } 
-.madrid{
-  margin-right: 1300px;
 
+.madrid {
+  margin-right: 1300px;
 }

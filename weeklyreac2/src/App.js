@@ -4,6 +4,12 @@ import BarcaTeam from "./BarcaTeam"
 import TransferList from "./TransferList"
 import Real from "./Real"
 import TransferListBox from "./TransferListBox"
+const initialState = {
+  currentPlayer: '',
+  transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
+  madrid: [],
+  barca: []
+};
 
 class App extends Component {
   constructor() {
@@ -14,11 +20,13 @@ class App extends Component {
     this.MadridTransfer = this.MadridTransfer.bind(this);
     this.TransferList = this.TransferList.bind(this);
     this.Restart = this.Restart.bind(this);
+
     this.state = {
       currentPlayer: '',
       transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
       madrid: [],
-      barca: []
+      barca: [],
+      bayern: []
     }
   }
   // grabs player info
@@ -42,44 +50,63 @@ class App extends Component {
     var barcaTransfer = event.target.value;
     var barcaTeam = this.state.barca;
     var playerArray = this.state.transfers;
-    if( playerArray.indexOf(playerArray,  barcaTransfer)){
-     playerArray.splice(barcaTransfer, 1)
-     barcaTeam.push(barcaTransfer);
+    let i = playerArray.indexOf(barcaTransfer);
+    if(i > -1) {
+        playerArray.splice(i, 1);
+        barcaTeam.push(barcaTransfer);
 
-   }
-    this.setState({
-      transfers: playerArray,
-      barca: barcaTeam
-    })
+        this.setState({
+          transfers: playerArray,
+          barca: barcaTeam
+        });
+    }
   }
   //pushs to madrid team
   MadridTransfer(event) {
-    var madridTransfer = event.target.value;
-    var madridTeam = this.state.madrid;
-    var playerArray = this.state.transfers;
-   if( playerArray.indexOf(playerArray,  madridTransfer)){
-     playerArray.splice(madridTransfer, 1)
-      madridTeam.push(madridTransfer);
+    const { madrid, transfers } = this.state;
+    const madridTransfer = event.target.value;
+   
+    const i = transfers.indexOf(madridTransfer);
+    if(i > -1) {
+      transfers.splice(i, 1);
+      madrid.push(madridTransfer);
 
-   }
-    this.setState({
-      transfers: playerArray,
-      madrid: madridTeam
-    })
+      this.setState({
+        transfers,
+        madrid
+      });
+    }
   }
   //sends back to unassaign list 
   TransferList(event) {
+    const { barca, madrid, transfers } = this.state;
     var transferBack = event.target.value;
-    var playerArray = this.state.transfers;
-    if( playerArray.indexOf(playerArray, transferBack)){
-     playerArray.splice(transferBack, 1)
-         playerArray.push(transferBack);
+    // const currentList = 'barca'
+    // const list = this.state[currentList];
+    // event has player to be searched aka needle
+    // TEMP check each list
+    const barcaIndex = barca.indexOf(transferBack);
+    const madridIndex = madrid.indexOf(transferBack);
+    // two haystacks (barca, madrid)
+    console.log(barcaIndex, madridIndex);
+    // look in one haystack
+    // if in haystack remove and add to global transfers
+    if (barcaIndex > -1) {
+      barca.splice(barcaIndex, 1);
+      transfers.push(transferBack);
 
-   }
+    } else if (madridIndex > -1 ) {
+      madrid.splice(madridIndex, 1);
+      transfers.push(transferBack)
+    }
     this.setState({
-      transfers: playerArray
-    })
+        transfers,
+        madrid,
+        barca,
+      });
+    // else if in other haystack remove and add to global transfers
   }
+  
   Restart(){
     this.setState({
       currentPlayer: '',
@@ -113,9 +140,7 @@ class App extends Component {
           key={i}
           person={person}
           barcaTransfer={this.barcaTransfer}
-          MadridTransfer={this.MadridTransfer}
           TransferList={this.TransferList}
-
         />
       )
     }, this)
@@ -125,7 +150,6 @@ class App extends Component {
           value={person}
           key={i}
           person={person}
-          barcaTransfer={this.barcaTransfer}
           MadridTransfer={this.MadridTransfer}
           TransferList={this.TransferList}
 
@@ -138,6 +162,9 @@ class App extends Component {
         <div className="madrid">
           {madridList}
         </div>
+        <div className="barca">
+          {barcaList}
+        </div>
         <div className="window">
           <TransferList
             getPlayer={this.getPlayer}
@@ -147,9 +174,7 @@ class App extends Component {
           />
           {contactList}
         </div>
-        <div className="barca">
-          {barcaList}
-        </div>
+        
       </div>
     );
   }

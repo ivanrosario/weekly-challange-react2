@@ -1,21 +1,19 @@
-   body{
-font-family: sans-serif;
-background:  no-repeat center/125% url('image/champions_league.jpg');
-color: green;
+body{
+  font-family: sans-serif;
+  background:  no-repeat center/125% url('image/champions_league.jpg');
+  color: green;
 } 
 
- .rm-shield {
-z-index: 1;
-background-image: url('image/rm-shield.gif');
-background-size: cover;
-height: 300px;
-width: 225px;
-
+.rm-shield {
+  z-index: 1;
+  background-image: url('image/rm-shield.gif');
+  background-size: cover;
+  height: 300px;
+  width: 225px;
 }  
 
-
 .Transfer{
-margin: 0 auto;
+  margin: 0 auto;
 }
 
 .window{
@@ -24,20 +22,27 @@ margin: 0 auto;
   margin-left: 600px;
   margin-right: 660px;
   text-align:center;
+  height: 650px;
+  overflow-y: scroll;
 }
-.barca{
-  margin-left: 1300px;
+
+.barca {
+  /* margin-left: 1300px;  */
+  position: absolute;
+  right: 10px;
   background-color: #0E1E5B;
   border: 3px solid red;
-
-
-
+  height: 350px;
+  width: 150px;
+  overflow-y: scroll;
 }
 
 .madrid{
-  margin-right: 1300px;
+  /* margin-right: 1300px; */
+  position: absolute;
   background-color: white;
   border: 3px solid gold;
-
-
+  height: 350px;
+  width: 150px;
+  overflow-y: scroll;
 }

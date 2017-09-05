@@ -8,9 +8,8 @@ function BarcaTeam(props) {
       <div className="people" >
         <div>
          <p>{props.person}</p>
-          <button onClick={props.barcaTransfer} value={props.value}>Barca?</button>
-          <button value={props.value}  value={props.value} onClick={props.TransferList}>TransferList</button>  
-          <button value={props.value} value={props.value} onClick={props.MadridTransfer}>Madrid?</button>  
+          <button value={props.value}  onClick={props.TransferList}>TransferList</button>  
+          <button value={props.value}  onClick={props.MadridTransfer}>Madrid?</button>  
         </div>
       </div>
     )
