@@ -9,7 +9,6 @@ function BarcaTeam(props) {
         <div>
          <p>{props.person}</p>
           <button value={props.value}  onClick={props.TransferList}>TransferList</button>  
-          <button value={props.value}  onClick={props.MadridTransfer}>Madrid?</button>  
         </div>
       </div>
     )

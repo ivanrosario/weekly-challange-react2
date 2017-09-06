@@ -81,16 +81,12 @@ class App extends Component {
   TransferList(event) {
     const { barca, madrid, transfers } = this.state;
     var transferBack = event.target.value;
-    // const currentList = 'barca'
-    // const list = this.state[currentList];
     // event has player to be searched aka needle
     // TEMP check each list
     const barcaIndex = barca.indexOf(transferBack);
     const madridIndex = madrid.indexOf(transferBack);
     // two haystacks (barca, madrid)
-    console.log(barcaIndex, madridIndex);
     // look in one haystack
-    // if in haystack remove and add to global transfers
     if (barcaIndex > -1) {
       barca.splice(barcaIndex, 1);
       transfers.push(transferBack);
@@ -139,7 +135,6 @@ class App extends Component {
           value={person}
           key={i}
           person={person}
-          barcaTransfer={this.barcaTransfer}
           TransferList={this.TransferList}
         />
       )
@@ -150,7 +145,6 @@ class App extends Component {
           value={person}
           key={i}
           person={person}
-          MadridTransfer={this.MadridTransfer}
           TransferList={this.TransferList}
 
         />
@@ -160,9 +154,11 @@ class App extends Component {
     return (
       <div>
         <div className="madrid">
+         <h1 className="mad">MADRID</h1>
           {madridList}
         </div>
         <div className="barca">
+          <h1 className="bar">  BARCA</h1>
           {barcaList}
         </div>
         <div className="window">

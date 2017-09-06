@@ -9,7 +9,6 @@ function Real(props) {
       <div className="people" >
         <div>
          <p>{props.person}</p>
-          <button onClick={props.barcaTransfer} value={props.value}>Barca?</button>
           <button value={props.value} onClick={props.TransferList}>TransferList</button>  
         </div>
       </div>

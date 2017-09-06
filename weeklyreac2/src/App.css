@@ -3,7 +3,9 @@ body{
   background:  no-repeat center/125% url('image/champions_league.jpg');
   color: green;
 } 
-
+h1{
+  margin-bottom: 30px
+}
 .rm-shield {
   z-index: 1;
   background-image: url('image/rm-shield.gif');
@@ -45,4 +47,13 @@ body{
   height: 350px;
   width: 150px;
   overflow-y: scroll;
+}
+.bar{
+  color: red;
+  margin-left: 20px;
+}
+.mad{
+  color: gold;
+  margin-left: 10px;
+
 }
