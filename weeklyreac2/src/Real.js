@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 
 function Real(props) {
-
-
     return (
       <div className="people" >
         <div>

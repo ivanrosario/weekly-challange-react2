@@ -4,12 +4,6 @@ import BarcaTeam from "./BarcaTeam"
 import TransferList from "./TransferList"
 import Real from "./Real"
 import TransferListBox from "./TransferListBox"
-const initialState = {
-  currentPlayer: '',
-  transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
-  madrid: [],
-  barca: []
-};
 
 class App extends Component {
   constructor() {
@@ -26,19 +20,22 @@ class App extends Component {
       transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
       madrid: [],
       barca: [],
-      bayern: []
     }
   }
+
   // grabs player info
   getPlayer(props) {
     const player = props.target.value;
+
     this.setState({
       currentPlayer: player,
     });
   }
+
   // pushs info to transfers(avalaibe players)
   handleClick() {
-    var playerArray = this.state.transfers;
+    let playerArray = this.state.transfers;
+
     playerArray.push(this.state.currentPlayer);
     this.setState({
       currentPlayer: '',
@@ -47,10 +44,11 @@ class App extends Component {
   }
   //pushs to the team of Barca
   barcaTransfer(event) {
-    var barcaTransfer = event.target.value;
-    var barcaTeam = this.state.barca;
-    var playerArray = this.state.transfers;
+    let barcaTransfer = event.target.value;
+    let barcaTeam = this.state.barca;
+    let playerArray = this.state.transfers;
     let i = playerArray.indexOf(barcaTransfer);
+
     if(i > -1) {
         playerArray.splice(i, 1);
         barcaTeam.push(barcaTransfer);
@@ -65,8 +63,8 @@ class App extends Component {
   MadridTransfer(event) {
     const { madrid, transfers } = this.state;
     const madridTransfer = event.target.value;
-   
     const i = transfers.indexOf(madridTransfer);
+
     if(i > -1) {
       transfers.splice(i, 1);
       madrid.push(madridTransfer);
@@ -80,26 +78,27 @@ class App extends Component {
   //sends back to unassaign list 
   TransferList(event) {
     const { barca, madrid, transfers } = this.state;
-    var transferBack = event.target.value;
+    let transferBack = event.target.value;
     // event has player to be searched aka needle
     // TEMP check each list
     const barcaIndex = barca.indexOf(transferBack);
     const madridIndex = madrid.indexOf(transferBack);
     // two haystacks (barca, madrid)
     // look in one haystack
+
     if (barcaIndex > -1) {
       barca.splice(barcaIndex, 1);
       transfers.push(transferBack);
-
     } else if (madridIndex > -1 ) {
-      madrid.splice(madridIndex, 1);
-      transfers.push(transferBack)
-    }
+        madrid.splice(madridIndex, 1);
+        transfers.push(transferBack)
+      }
+
     this.setState({
         transfers,
         madrid,
         barca,
-      });
+    });
     // else if in other haystack remove and add to global transfers
   }
   
@@ -124,11 +123,11 @@ class App extends Component {
           person={person}
           barcaTransfer={this.barcaTransfer}
           MadridTransfer={this.MadridTransfer}
-          TransferList={this.TransferList}
-
+          TransferList={this.TransferList}  
         />
       )
     }, this)
+
     const madridList = this.state.madrid.map(function (person, i) {
       return (
         < Real
@@ -139,6 +138,7 @@ class App extends Component {
         />
       )
     }, this)
+
     const barcaList = this.state.barca.map(function (person, i) {
       return (
         < BarcaTeam
@@ -154,8 +154,8 @@ class App extends Component {
     return (
       <div>
         <div className="madrid">
-         <h1 className="mad">MADRID</h1>
-          {madridList}
+           <h1 className="mad">MADRID</h1>
+           {madridList}
         </div>
         <div className="barca">
           <h1 className="bar">  BARCA</h1>
@@ -170,7 +170,6 @@ class App extends Component {
           />
           {contactList}
         </div>
-        
       </div>
     );
   }
