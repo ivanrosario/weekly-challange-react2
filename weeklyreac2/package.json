@@ -1,7 +1,9 @@
 {
   "name": "weeklyreac2",
+
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://irosario.road2hire.ninja/changeTeamapp",
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -14,3 +16,4 @@
     "eject": "react-scripts eject"
   }
 }
+

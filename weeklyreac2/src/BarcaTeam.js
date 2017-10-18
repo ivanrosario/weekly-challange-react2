@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 
 function BarcaTeam(props) {
-
     return (
       <div className="people" >
         <div>
@@ -13,12 +12,10 @@ function BarcaTeam(props) {
       </div>
     )
 } 
-
-
+  
   BarcaTeam.propTypes = {
   MadridTransfer: PropTypes.func,
   barcaTransfer: PropTypes.func,
   TransferList:  PropTypes.func,
-
 };
 export default BarcaTeam;

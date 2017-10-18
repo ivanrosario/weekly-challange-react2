@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import './App.css';
 import BarcaTeam from "./BarcaTeam"
 import TransferList from "./TransferList"
-import Real from "./Real"
+import RealTeam from "./RealTeam"
 import TransferListBox from "./TransferListBox"
 
 class App extends Component {
   constructor() {
     super();
     this.getPlayer = this.getPlayer.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.barcaTransfer = this.barcaTransfer.bind(this);
-    this.MadridTransfer = this.MadridTransfer.bind(this);
-    this.TransferList = this.TransferList.bind(this);
-    this.Restart = this.Restart.bind(this);
+    this.madridTransfer = this.madridTransfer.bind(this);
+    this.transferList = this.transferList.bind(this);
+    this.restart = this.restart.bind(this);
+    this.deleteFromTransferList = this.deleteFromTransferList.bind(this);
 
     this.state = {
       currentPlayer: '',
-      transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
+      transfers: ['ivan', 'ian', 'celio', 'oh', 'rafa'],
       madrid: [],
       barca: [],
     }
@@ -33,38 +33,45 @@ class App extends Component {
   }
 
   // pushs info to transfers(avalaibe players)
-  handleClick() {
+  handleClick =()=> {
     let playerArray = this.state.transfers;
+    let currentPlayer = this.state.currentPlayer;
 
-    playerArray.push(this.state.currentPlayer);
-    this.setState({
-      currentPlayer: '',
-      transfers: playerArray,
-    });
+    if(currentPlayer === ""){
+      alert("please enter a name");
+    }else{
+      playerArray.push(currentPlayer);
+      this.setState({
+        currentPlayer: '',
+        transfers: playerArray,
+      });
+    }
   }
+
   //pushs to the team of Barca
-  barcaTransfer(event) {
+  barcaTransfer(event)  {
     let barcaTransfer = event.target.value;
     let barcaTeam = this.state.barca;
     let playerArray = this.state.transfers;
     let i = playerArray.indexOf(barcaTransfer);
 
     if(i > -1) {
-        playerArray.splice(i, 1);
-        barcaTeam.push(barcaTransfer);
+       playerArray.splice(i, 1);
+      barcaTeam.push(barcaTransfer);
 
-        this.setState({
-          transfers: playerArray,
-          barca: barcaTeam
-        });
+      this.setState({
+        transfers: playerArray,
+        barca: barcaTeam
+      });
     }
   }
   //pushs to madrid team
-  MadridTransfer(event) {
+  madridTransfer(event) {
+    //  is called Destructuring assignment: madrid.state transfers.state
     const { madrid, transfers } = this.state;
     const madridTransfer = event.target.value;
     const i = transfers.indexOf(madridTransfer);
-
+// if the one checked existed lets take him out of there
     if(i > -1) {
       transfers.splice(i, 1);
       madrid.push(madridTransfer);
@@ -76,7 +83,7 @@ class App extends Component {
     }
   }
   //sends back to unassaign list 
-  TransferList(event) {
+  transferList(event) {
     const { barca, madrid, transfers } = this.state;
     let transferBack = event.target.value;
     // event has player to be searched aka needle
@@ -89,9 +96,10 @@ class App extends Component {
     if (barcaIndex > -1) {
       barca.splice(barcaIndex, 1);
       transfers.push(transferBack);
-    } else if (madridIndex > -1 ) {
-        madrid.splice(madridIndex, 1);
-        transfers.push(transferBack)
+    } 
+    else if (madridIndex > -1 ) {
+       madrid.splice(madridIndex, 1);
+      transfers.push(transferBack)
       }
 
     this.setState({
@@ -101,64 +109,76 @@ class App extends Component {
     });
     // else if in other haystack remove and add to global transfers
   }
+
+  deleteFromTransferList(event){
+    const { transfers } = this.state;
+    let removePlayer = event.target.value;
+    let transferIndex = transfers.indexOf(removePlayer);
+    if(transferIndex > -1){
+      transfers.splice(transferIndex, 1);
+    }
+
+    this.setState({
+      transfers
+    })
+    
+  }
   
-  Restart(){
+  restart =()=>{
     this.setState({
       currentPlayer: '',
-      transfers: ['ivan', 'ian', 'celio', 'juan', 'rafa'],
+      transfers: ['ivan', 'ian', 'celio', 'oh', 'rafa'],
       madrid: [],
       barca: []
-
     })
   }
 
-
   render() {
-    //all of these are  used to loop thru each one 
+    // Calls a defined callback function on each element of an array, and returns an array that contains the results.
     const contactList = this.state.transfers.map(function (person, i) {
-      return (
+      return(
         <TransferListBox
           value={person}
           key={i}
           person={person}
           barcaTransfer={this.barcaTransfer}
-          MadridTransfer={this.MadridTransfer}
-          TransferList={this.TransferList}  
+          MadridTransfer={this.madridTransfer}
+          TransferList={this.transferList} 
+          deleteFromTransferList ={this.deleteFromTransferList} 
         />
       )
     }, this)
 
     const madridList = this.state.madrid.map(function (person, i) {
-      return (
-        < Real
+      return(
+        <RealTeam
           value={person}
           key={i}
           person={person}
-          TransferList={this.TransferList}
+          TransferList={this.transferList}
         />
       )
     }, this)
 
     const barcaList = this.state.barca.map(function (person, i) {
-      return (
-        < BarcaTeam
+      return(
+        <BarcaTeam
           value={person}
           key={i}
           person={person}
-          TransferList={this.TransferList}
-
+          TransferList={this.transferList}
         />
       )
     }, this)
     // end of the loops of teams / unassaign list i just call them by the varaible 
-    return (
+    return(
       <div>
         <div className="madrid">
            <h1 className="mad">MADRID</h1>
            {madridList}
         </div>
         <div className="barca">
-          <h1 className="bar">  BARCA</h1>
+          <h1 className="bar">BARCA</h1>
           {barcaList}
         </div>
         <div className="window">
@@ -166,7 +186,7 @@ class App extends Component {
             getPlayer={this.getPlayer}
             currentPlayer={this.state.currentPlayer}
             handleClick={this.handleClick}
-            Restart={this.Restart}
+            Restart={this.restart}
           />
           {contactList}
         </div>
