@@ -5,14 +5,12 @@ function TransferList(props) {
 
     return (
       <div className="Transfer">
-        <h1> Restart  
+        <h1> Restart
            <button id="addBtn" onClick={props.Restart}>Restart</button></h1>
         <input type="text" id="TransferList" name="TransferList" onChange={props.getPlayer} value={props.currentPlayer} />
         <button id="addBtn" onClick={props.handleClick}>Add</button>
       </div>
-    
     )
-   
 }
 TransferList.propTypes = {
   getPlayer: PropTypes.func,

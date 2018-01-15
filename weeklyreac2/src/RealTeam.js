@@ -16,8 +16,8 @@ function RealTeam(props) {
 
  RealTeam.propTypes = {
   MadridTransfer: PropTypes.func,
- barcaTransfer: PropTypes.func,
- TransferList:  PropTypes.func,
+  barcaTransfer: PropTypes.func,
+  TransferList:  PropTypes.func,
 
 };
 export default RealTeam;

@@ -53,10 +53,9 @@ class App extends Component {
     let barcaTransfer = event.target.value;
     let barcaTeam = this.state.barca;
     let playerArray = this.state.transfers;
-    let i = playerArray.indexOf(barcaTransfer);
 
     if(i > -1) {
-       playerArray.splice(i, 1);
+      playerArray.splice(i, 1);
       barcaTeam.push(barcaTransfer);
 
       this.setState({
@@ -82,7 +81,7 @@ class App extends Component {
       });
     }
   }
-  //sends back to unassaign list 
+  //sends back to unassaign list
   transferList(event) {
     const { barca, madrid, transfers } = this.state;
     let transferBack = event.target.value;
@@ -96,10 +95,10 @@ class App extends Component {
     if (barcaIndex > -1) {
       barca.splice(barcaIndex, 1);
       transfers.push(transferBack);
-    } 
+    }
     else if (madridIndex > -1 ) {
        madrid.splice(madridIndex, 1);
-      transfers.push(transferBack)
+      transfers.push(transferBack);
       }
 
     this.setState({
@@ -121,9 +120,8 @@ class App extends Component {
     this.setState({
       transfers
     })
-    
   }
-  
+
   restart =()=>{
     this.setState({
       currentPlayer: '',
@@ -134,7 +132,8 @@ class App extends Component {
   }
 
   render() {
-    // Calls a defined callback function on each element of an array, and returns an array that contains the results.
+    // Calls a defined callback function on each element of an array,
+    //and returns an array that contains the results.
     const contactList = this.state.transfers.map(function (person, i) {
       return(
         <TransferListBox
@@ -143,8 +142,8 @@ class App extends Component {
           person={person}
           barcaTransfer={this.barcaTransfer}
           MadridTransfer={this.madridTransfer}
-          TransferList={this.transferList} 
-          deleteFromTransferList ={this.deleteFromTransferList} 
+          TransferList={this.transferList}
+          deleteFromTransferList ={this.deleteFromTransferList}
         />
       )
     }, this)

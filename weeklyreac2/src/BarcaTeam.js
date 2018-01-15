@@ -11,8 +11,8 @@ function BarcaTeam(props) {
         </div>
       </div>
     )
-} 
-  
+}
+
   BarcaTeam.propTypes = {
   MadridTransfer: PropTypes.func,
   barcaTransfer: PropTypes.func,

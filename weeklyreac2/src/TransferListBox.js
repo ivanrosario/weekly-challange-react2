@@ -15,8 +15,7 @@ function TransferListBox(props) {
       </div>
     </div>
     )
-} 
-
+}
 
 TransferListBox.propTypes = {
   MadridTransfer: PropTypes.func,
